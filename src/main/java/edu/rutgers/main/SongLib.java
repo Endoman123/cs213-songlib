@@ -18,7 +18,7 @@ public class SongLib extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Pane root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("/main.fxml"));
 
         root.autosize();
         primaryStage.setScene(new Scene(root));

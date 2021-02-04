@@ -8,4 +8,3 @@
  */
 
 rootProject.name = "template-cs213"
-include("app")
