@@ -2,21 +2,30 @@ package edu.rutgers.main;
 
 import edu.rutgers.library.*;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 /**
  * Main runner class
  */
-public class SongLib {
+public class SongLib extends Application {
     public static void main(String[] args) {
-        Library lib = new Library();
+        launch();
+    }
 
-        lib.read("test.txt");
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Pane root = FXMLLoader.load(getClass().getResource("main.fxml"));
 
-        // lib.add(new Song("Sun Veins", "Landmark", "Hippo Campus", 2017));
-        // lib.add(new Song("Way it Goes", "Landmark", "Hippo Campus", 2017));
-        // lib.add(new Song("Vines", "Landmark", "Hippo Campus", 2017));
+        root.autosize();
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.setTitle("SongLib");
 
-        System.out.println(lib.toString());
-
-        // lib.write("test.txt");
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 }
