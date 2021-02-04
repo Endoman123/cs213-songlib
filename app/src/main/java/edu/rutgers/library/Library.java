@@ -1,13 +1,13 @@
 package edu.rutgers.library;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
  * A collection of songs.
  * <p>
- * This class handles organization of songs ONLY. This class does NOT handle
- * writing out the songs to a file, nor does this class handle displaying the
- * list in a GUI (though it should print the song list as text just fine).
+ * This will handle the organization of the library,
+ * as well the file i/o of libraries.
  * <p>
  * This is an extension of an {@code ArrayList}, so all those functions apply,
  * as well as some niceties.
@@ -46,6 +46,80 @@ public class Library extends ArrayList<Song> {
         }
 
         return null;
+    }
+
+    /**
+     * Read a file and import the contents into this library.
+     * <p>
+     * This will overwrite the contents of this library.
+     * 
+     * @param path the path to the file to read from
+     */
+    public void read(String path) {
+        try { 
+            BufferedReader r = new BufferedReader(new FileReader(path));
+    
+            for (String s = r.readLine(); s != null; s = r.readLine()) { 
+                String[] fields = s.split("\\|");
+
+                add(new Song(
+                    fields[0].trim(),
+                    fields[1].trim(),
+                    fields[2].trim(),
+                    Integer.parseInt(fields[3].trim())
+                ));
+            }
+
+            r.close();
+        } catch (Exception e) { 
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Write the library out to a file.
+     * <p>
+     * Assumes that you want to overwrite the file if it exists.
+     * 
+     * @param path the path to write the library out to
+     */
+    public void write(String path) {
+        File f = new File(path);
+        BufferedWriter w;
+
+        // We're going to start with making sure that the
+        // file exists and can be written to
+        if (!f.exists()) {
+            File dir = f.getParentFile(); 
+
+            if (dir != null && !dir.exists() && dir.isDirectory()) {
+                if (!dir.mkdirs())
+                    return;
+            }                
+        } else
+            f.delete();
+
+
+        // Now we write to the file
+        try {
+            f.createNewFile();
+            w = new BufferedWriter(new FileWriter(f));
+
+            for (Song s : this) {
+                w.write(String.format(
+                    "%s | %s | %s | %s" + System.lineSeparator(), 
+                    s.getName(), 
+                    s.getAlbum(), 
+                    s.getArtist(), 
+                    "" + s.getYear()
+                ));
+            }
+
+            // Close the stream
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

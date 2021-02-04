@@ -23,9 +23,9 @@ public class Song {
      * @param y  the year the song was written
      */
     public Song(String n, String al, String ar, int y) {
-        name = n;
-        album = al;
-        artist = ar;
+        name = n.trim();
+        album = al.trim();
+        artist = ar.trim();
 
         if (y < 0) {
             throw new IllegalArgumentException("Song year cannot be less than 0!");
@@ -34,18 +34,45 @@ public class Song {
         year = y;
     }
 
+    /**
+     * Sets the name of the song.
+     * <p> 
+     * The input is trimmed.
+     * 
+     * @param v the new name of the song
+     */
     public void setName(String v) {
-        name = v;
+        name = v.trim();
     }
 
+    /**
+     * Sets the album of the song.
+     * <p> 
+     * The input is trimmed.
+     * 
+     * @param v the new album the song belongs to
+     */
     public void setAlbum(String v) {
-        album = v;
+        album = v.trim();
     }
 
+    /**
+     * Sets the artist of the song.
+     * <p> 
+     * The input is trimmed.
+     * 
+     * @param v the new artist of the song
+     */
     public void setArtist(String v) {
-        artist = v;
+        artist = v.trim();
     }
 
+    /**
+     * Sets the year of the song.
+     * 
+     * @param v the new year of the song
+     * @throws  IllegalArgumentException if year is less than 0
+     */
     public void setYear(int v) {
         if (v < 0) {
             throw new IllegalArgumentException("Song year cannot be less than 0!");
