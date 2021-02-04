@@ -1,4 +1,4 @@
-# template-cs213
-CS213 template for all projects.
+# cs213-songlib
+SongLib project for CS213.
 
-This is a Gradle project with `java`, `application`, and `openjfx`
+Instructions can be found in `assignment.pdf`
