@@ -41,7 +41,7 @@ gradle-app.setting
 hs_err_pid*
 
 ## Global/VisualStudioCode
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -185,3 +185,7 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+## Other Build Tool ignores
+.classpath
+.project
