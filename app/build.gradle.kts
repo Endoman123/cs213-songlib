@@ -37,5 +37,5 @@ tasks.compileJava {
 
 application {
     // Define the main class for the application.
-    mainClass.set("edu.rutgers.main.App")
+    mainClass.set("edu.rutgers.main.SongLib")
 }
