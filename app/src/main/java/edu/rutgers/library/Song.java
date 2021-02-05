@@ -15,21 +15,36 @@ public class Song implements Comparable<Song> {
     private int year;
 
     /**
+     * Constructs a new Song with the provided name and artist.
+     * Sets defaults for the album and year.
+     * <p>
+     * This is effectively the same call as:
+     * <pre>
+     * Song(n, ar, "", 0); 
+     * </pre> 
+     * 
+     * @param n  the name of the song
+     * @param ar the artist of the song
+     */
+    public Song(String n, String ar) {
+        this(n, ar, "", 0);
+    }
+
+    /**
      * Constructs a new Song with the provided fields.
      * 
      * @param n  the name of the song
-     * @param al the album the song is a part of
      * @param ar the artist of the song
+     * @param al the album the song is a part of
      * @param y  the year the song was written
      */
-    public Song(String n, String al, String ar, int y) {
+    public Song(String n, String ar, String al, int y) {
         name = n.trim();
-        album = al.trim();
         artist = ar.trim();
+        album = al.trim();
 
-        if (y < 0) {
+        if (y < 0)
             throw new IllegalArgumentException("Song year cannot be less than 0!");
-        }
 
         year = y;
     }
@@ -131,10 +146,10 @@ public class Song implements Comparable<Song> {
     public String toString() {
         return String.format(
                     "%s - %s [%s, %s]", 
-                    artist,
                     name,
-                    album,
-                    year == 0 ? "????" : "" + year
+                    artist,
+                    year == 0 ? "????" : "" + year,
+                    album.isEmpty() ? "????" : album
                 );
     }
 }

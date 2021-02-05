@@ -32,11 +32,25 @@ public class Library extends ModifiableObservableListBase<Song> {
      *               or {@code null} if nonexistent
      */
     public Song get(String name, String artist) {
-        for (Song s : delegate) {
-            if (s.getName().equals(name) && s.getArtist().equals(artist))
-                return s;
+        int l = 0, r = size() - 1, m;
+
+        // Yes, we construct a new song just to use the compareTo method.
+        // No, I don't regret anything.
+        Song s = new Song(name, artist);
+
+        while (l <= r) {
+            m = (int)((l + r) / 2);
+            int comp = delegate.get(m).compareTo(s);
+
+            if (comp < 0) { // Song must come before, move the right pointer
+                r = m - 1;
+            } else if (comp > 0) { // Song must come after, move the left pointer
+                l = m + 1;
+            } else // Song exists, return
+                return delegate.get(m);
         }
 
+        // Song does not exist
         return null;
     }
 
@@ -53,7 +67,6 @@ public class Library extends ModifiableObservableListBase<Song> {
             m = (int)((l + r) / 2);
             int comp = delegate.get(m).compareTo(s);
 
-            System.out.println(s.toString() + " vs " + delegate.get(m).toString() + " = " + comp);
             if (comp < 0) { // Song must come before, move the right pointer
                 r = m - 1;
             } else if (comp > 0) { // Song must come after, move the left pointer
@@ -182,8 +195,8 @@ public class Library extends ModifiableObservableListBase<Song> {
                 w.write(String.format(
                     "%s | %s | %s | %s" + System.lineSeparator(), 
                     s.getName(), 
-                    s.getAlbum(), 
                     s.getArtist(), 
+                    s.getAlbum(), 
                     "" + s.getYear()
                 ));
             }
