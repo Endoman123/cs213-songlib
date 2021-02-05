@@ -2,6 +2,7 @@ package edu.rutgers.library;
 
 import java.io.*;
 import java.util.ArrayList;
+import javafx.collections.ModifiableObservableListBase;
 
 /**
  * A collection of songs.
@@ -9,26 +10,17 @@ import java.util.ArrayList;
  * This will handle the organization of the library,
  * as well the file i/o of libraries.
  * <p>
- * This is an extension of an {@code ArrayList}, so all those functions apply,
+ * This is an extension of an {@code ModifiableObservableList}, so all those functions apply,
  * as well as some niceties.
  * 
  * @see Song
+ * @see ModifiableObservableList
  */
-public class Library extends ArrayList<Song> {
-    /**
-     * Add a song to the collection, so long as it is not a duplicate.
-     * 
-     * @param s the song to add to the library
-     * @return  1 if successful,
-     *          0 otherwise
-     */
-    public boolean add(Song s) {
-       if (get(s.getName(), s.getArtist()) == null) {
-           super.add(s);
-           return true;
-       }
+public class Library extends ModifiableObservableListBase<Song> {
+    private final ArrayList<Song> delegate;
 
-       return false;
+    public Library() {
+        delegate = new ArrayList<>();
     }
 
     /**
@@ -40,12 +32,93 @@ public class Library extends ArrayList<Song> {
      *               or {@code null} if nonexistent
      */
     public Song get(String name, String artist) {
-        for (Song s : this) {
+        for (Song s : delegate) {
             if (s.getName().equals(name) && s.getArtist().equals(artist))
                 return s;
         }
 
         return null;
+    }
+
+    /**
+     * Adds a song to the library, maintaining list order.
+     * 
+     * @param s the song to add to the library
+     */
+    @Override
+    public boolean add(Song s) {
+        int l = 0, r = size() - 1, m;
+
+        while (l <= r) {
+            m = (int)((l + r) / 2);
+            int comp = delegate.get(m).compareTo(s);
+
+            System.out.println(s.toString() + " vs " + delegate.get(m).toString() + " = " + comp);
+            if (comp < 0) { // Song must come before, move the right pointer
+                r = m - 1;
+            } else if (comp > 0) { // Song must come after, move the left pointer
+                l = m + 1;
+            } else // Song exists, exit
+                return false;
+        }
+
+        // Insert the song into the rightmost pointer
+        doAdd((int)((l + r + 1) / 2), s);
+        return true;
+    }
+
+    /**
+     * Finds a song by list index.
+     * 
+     * @param index  the index in the library to get the song at
+     * @return       the {@code Song} at the specified index,
+     *               or {@code null} if nonexistent
+     */ 
+    @Override
+    public Song get(int index) {
+        return delegate.get(index);
+    }
+
+    /**
+     * Sets the {@code Song} at the index to {@code element}.
+     * 
+     * @param index   the index of the element to change
+     * @param element the new {@code Song} to replace this element
+     * @return        the changed {@code Song}
+     */
+    @Override
+    protected Song doSet(int index, Song element) {
+        return delegate.set(index, element);
+    }
+
+    /**
+     * Add a song to the collection, so long as it is not a duplicate.
+     * 
+     * @param index the position at which to insert the new song
+     * @param s     the song to add to the library
+     */
+    @Override
+    protected void doAdd(int index, Song s) {
+        delegate.add(index, s);
+    }
+
+    /**
+     * Remove a song from the collection.
+     * 
+     * @param index the index of the song to remove
+     * @return      the removed {@code Song} object,
+     */
+    @Override
+    protected Song doRemove(int index) {
+        return delegate.remove(index);
+    }
+
+    /**
+     * Gets the number of songs in the library
+     */
+    @Override
+    public int size() {
+        return delegate.size();
     }
 
     /**
@@ -105,7 +178,7 @@ public class Library extends ArrayList<Song> {
             f.createNewFile();
             w = new BufferedWriter(new FileWriter(f));
 
-            for (Song s : this) {
+            for (Song s : delegate) {
                 w.write(String.format(
                     "%s | %s | %s | %s" + System.lineSeparator(), 
                     s.getName(), 
@@ -133,7 +206,7 @@ public class Library extends ArrayList<Song> {
         // of a string object
         StringBuilder b = new StringBuilder();
         
-        for (Song s : this)
+        for (Song s : delegate)
             b.append("" + s + System.lineSeparator());
         
         return b.toString();

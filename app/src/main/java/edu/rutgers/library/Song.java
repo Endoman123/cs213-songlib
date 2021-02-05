@@ -8,7 +8,7 @@ package edu.rutgers.library;
  * 
  * @see Library
  */
-public class Song {
+public class Song implements Comparable<Song> {
     private String name;
     private String album;
     private String artist;
@@ -32,6 +32,25 @@ public class Song {
         }
 
         year = y;
+    }
+
+    /**
+     * Compares this song to another one by name, 
+     * then artist if the names match.
+     * <p>
+     * This will not guarantee that the albums or year match,
+     * that comparison must be done separately.
+     * @param s the other song to compare
+     * @return  -1 if this song comes before
+     *           1 if this song comes after
+     *           0 if the name and artist match.
+     */
+    @Override
+    public int compareTo(Song s) {
+        String self = name + artist;
+        String other = s.name + s.artist;
+
+        return (int)Math.signum(other.compareTo(self));
     }
 
     /**
