@@ -52,7 +52,7 @@
             </VBox>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="btnAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Add" />
+                <Button fx:id="btnAdd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#addSong" text="Add" />
                   <Button fx:id="btnEdit" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="294.0" layoutY="60.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Edit" />
                   <Button fx:id="btnDelete" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="294.0" layoutY="60.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Delete" />
               </buttons>

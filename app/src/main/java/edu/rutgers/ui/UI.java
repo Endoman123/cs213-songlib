@@ -37,6 +37,8 @@ public class UI {
         System.out.println("Library app started");
 
         lstSongs.setItems(olLibrary);
+
+        lstSongs.getSelectionModel().select(0);        
         lstSongs.getSelectionModel().selectedItemProperty().addListener( (ov, old_val, new_val) -> {
             if ((int)new_val == -1)
                 curState = State.ADD;
