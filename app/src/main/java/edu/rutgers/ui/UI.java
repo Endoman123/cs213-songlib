@@ -2,7 +2,10 @@ package edu.rutgers.ui;
 
 import edu.rutgers.library.*;
 
+import javafx.event.ActionEvent;
+
 import javafx.fxml.*;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 
@@ -38,12 +41,27 @@ public class UI {
 
         lstSongs.setItems(olLibrary);
 
-        lstSongs.getSelectionModel().select(0);        
-        lstSongs.getSelectionModel().selectedItemProperty().addListener( (ov, old_val, new_val) -> {
+        lstSongs.getSelectionModel().select(0);
+        lstSongs.getSelectionModel().selectedIndexProperty().addListener( (ov, old_val, new_val) -> {
             if ((int)new_val == -1)
                 curState = State.ADD;
             else
                 curState = State.VIEW;
         });
+    }
+
+    @FXML
+    public void addSong() {
+
+    }
+
+    public void close() {
+        lib.write("library.txt");
+        System.out.println("Saved to library.txt");
+    }
+
+    @FXML
+    public void exitApplication(ActionEvent event) {
+        Platform.exit();
     }
 }
