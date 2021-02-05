@@ -7,5 +7,5 @@
  * in the user manual at https://docs.gradle.org/6.8.1/userguide/multi_project_builds.html
  */
 
-rootProject.name = "template-cs213"
+rootProject.name = "cs213-songlib"
 include("app")
