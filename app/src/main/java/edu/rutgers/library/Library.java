@@ -2,7 +2,6 @@ package edu.rutgers.library;
 
 import java.io.*;
 import java.util.ArrayList;
-import javafx.collections.ModifiableObservableListBase;
 
 /**
  * A collection of songs.
@@ -16,11 +15,8 @@ import javafx.collections.ModifiableObservableListBase;
  * @see Song
  * @see ModifiableObservableList
  */
-public class Library extends ModifiableObservableListBase<Song> {
-    private final ArrayList<Song> delegate;
-
+public class Library extends ArrayList<Song> {
     public Library() {
-        delegate = new ArrayList<>();
     }
 
     /**
@@ -40,14 +36,14 @@ public class Library extends ModifiableObservableListBase<Song> {
 
         while (l <= r) {
             m = (int)((l + r) / 2);
-            int comp = delegate.get(m).compareTo(s);
+            int comp = get(m).compareTo(s);
 
             if (comp < 0) { // Song must come before, move the right pointer
                 r = m - 1;
             } else if (comp > 0) { // Song must come after, move the left pointer
                 l = m + 1;
             } else // Song exists, return
-                return delegate.get(m);
+                return get(m);
         }
 
         // Song does not exist
@@ -65,7 +61,7 @@ public class Library extends ModifiableObservableListBase<Song> {
 
         while (l <= r) {
             m = (int)((l + r) / 2);
-            int comp = delegate.get(m).compareTo(s);
+            int comp = get(m).compareTo(s);
 
             if (comp < 0) { // Song must come before, move the right pointer
                 r = m - 1;
@@ -76,62 +72,8 @@ public class Library extends ModifiableObservableListBase<Song> {
         }
 
         // Insert the song into the rightmost pointer
-        doAdd((int)((l + r + 1) / 2), s);
+        add((int)((l + r + 1) / 2), s);
         return true;
-    }
-
-    /**
-     * Finds a song by list index.
-     * 
-     * @param index  the index in the library to get the song at
-     * @return       the {@code Song} at the specified index,
-     *               or {@code null} if nonexistent
-     */ 
-    @Override
-    public Song get(int index) {
-        return delegate.get(index);
-    }
-
-    /**
-     * Sets the {@code Song} at the index to {@code element}.
-     * 
-     * @param index   the index of the element to change
-     * @param element the new {@code Song} to replace this element
-     * @return        the changed {@code Song}
-     */
-    @Override
-    protected Song doSet(int index, Song element) {
-        return delegate.set(index, element);
-    }
-
-    /**
-     * Add a song to the collection, so long as it is not a duplicate.
-     * 
-     * @param index the position at which to insert the new song
-     * @param s     the song to add to the library
-     */
-    @Override
-    protected void doAdd(int index, Song s) {
-        delegate.add(index, s);
-    }
-
-    /**
-     * Remove a song from the collection.
-     * 
-     * @param index the index of the song to remove
-     * @return      the removed {@code Song} object,
-     */
-    @Override
-    protected Song doRemove(int index) {
-        return delegate.remove(index);
-    }
-
-    /**
-     * Gets the number of songs in the library
-     */
-    @Override
-    public int size() {
-        return delegate.size();
     }
 
     /**
@@ -191,7 +133,7 @@ public class Library extends ModifiableObservableListBase<Song> {
             f.createNewFile();
             w = new BufferedWriter(new FileWriter(f));
 
-            for (Song s : delegate) {
+            for (Song s : this) {
                 w.write(String.format(
                     "%s | %s | %s | %s" + System.lineSeparator(), 
                     s.getName(), 
@@ -219,7 +161,7 @@ public class Library extends ModifiableObservableListBase<Song> {
         // of a string object
         StringBuilder b = new StringBuilder();
         
-        for (Song s : delegate)
+        for (Song s : this)
             b.append("" + s + System.lineSeparator());
         
         return b.toString();

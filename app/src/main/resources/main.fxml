@@ -8,12 +8,17 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rutgers.ui.UI">
    <children>
-      <ListView fx:id="lstSongs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="211.0" />
+      <AnchorPane HBox.hgrow="ALWAYS">
+         <children>
+            <ListView fx:id="lstSongs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="211.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
       <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
          <children>
             <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
@@ -22,25 +27,25 @@
                   <Group>
                      <children>
                         <Label fx:id="lblName" layoutX="14.0" layoutY="5.0" text="Name:" />
-                        <TextField fx:id="txtName" alignment="CENTER" layoutX="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" />
+                        <TextField fx:id="txtName" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblArtist" layoutX="14.0" layoutY="5.0" text="Artist:" />
-                        <TextField fx:id="txtArtist" alignment="CENTER" layoutX="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" />
+                        <TextField fx:id="txtArtist" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblAlbum" layoutX="14.0" layoutY="5.0" text="Album:" />
-                        <TextField fx:id="txtAlbum" alignment="CENTER" layoutX="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" />
+                        <TextField fx:id="txtAlbum" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblYear" layoutX="14.0" layoutY="5.0" text="Year:" />
-                        <TextField fx:id="txtYear" alignment="CENTER" layoutX="67.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" />
+                        <TextField fx:id="txtYear" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                </children>
