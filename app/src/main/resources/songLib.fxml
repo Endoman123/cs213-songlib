@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songLib.view.SongLibController">
+<HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rutgers.ui.UI">
    <children>
       <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
          <children>
@@ -41,13 +41,16 @@
                </children>
             </AnchorPane>
          		
-               	<Button fx:id="editSong" onAction="#songMethod" prefWidth="150" text="Edit Song" />
+               	<Button fx:id="editSong" onAction="#editSong" prefWidth="150" text="Edit Song" />
          		
-               	<Button fx:id="deleteSong" onAction="#songMethod" prefWidth="150" text="Delete Song" />
+               	<Button fx:id="deleteSong" onAction="#deleteSong" prefWidth="150" text="Delete Song" />
          </children>
       </VBox>
-       
-                <ListView fx:id="listView" prefHeight="280" prefWidth="300.0" />
+      
+      <VBox>
+      		<ListView fx:id="lstSongs" prefHeight="280" prefWidth="300.0" />
+      </VBox>      
+                
       <VBox alignment="CENTER" prefWidth="213.0" spacing="10.0" HBox.hgrow="ALWAYS">
          <children>
          	
@@ -62,24 +65,24 @@
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="194.0" prefHeight="0.0" prefWidth="213.0">
                <children>
-                  <TextField fx:id="inputName1" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="inputArtist" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Artist" AnchorPane.leftAnchor="0.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="222.0" prefHeight="0.0" prefWidth="213.0">
                <children>
-                  <TextField fx:id="inputName11" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="inputAlbum" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Album" AnchorPane.leftAnchor="0.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="250.0" prefHeight="0.0" prefWidth="213.0">
                <children>
-                  <TextField fx:id="inputName111" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="inputYear" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Year" AnchorPane.leftAnchor="0.0" />
                </children>
             </AnchorPane>
          	
-                        	<Button fx:id="addSong" onAction="#songMethod" prefWidth="150" text="Add Song" />
+                        	<Button fx:id="addSong" onAction="#addSong" prefWidth="150" text="Add Song" />
          </children>
       </VBox>
    </children>

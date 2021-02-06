@@ -18,14 +18,15 @@ public class SongLib extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        UI ui;
+        
         FXMLLoader loader = new FXMLLoader();
-        Pane root;
+        loader.setLocation(getClass().getResource("/songLib.fxml"));
+        Pane root = (Pane)loader.load();
 
-        loader.setLocation(getClass().getResource("/main.fxml"));
-
-        ui = loader.getController();
-        root = loader.load();
+        //loader.setLocation(getClass().getResource("/main.fxml"));
+        
+        UI ui = loader.getController();
+        ui.start();
 
         root.autosize();
 
