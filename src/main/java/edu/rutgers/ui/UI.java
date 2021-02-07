@@ -208,11 +208,13 @@ public class UI {
             txtArtist.setText("");
             txtAlbum.setText("");
             txtYear.getEditor().setText("");
+
+            lblFieldStatus.setText("Add a song below:");
         } else {
             s = obsLib.get(curSelected);
 
             lblFieldStatus.setText("Editing " + s.toString());
-            debug("Editing \"%s\"", s.toString());
+            debug("Editing \"%s\"...", s.toString());
 
             txtName.setText(s.getName());
             txtArtist.setText(s.getArtist());
