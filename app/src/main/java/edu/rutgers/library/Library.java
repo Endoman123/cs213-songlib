@@ -60,6 +60,8 @@ public class Library extends ArrayList<Song> {
             m = (int)((l + r) / 2);
             int comp = get(m).compareTo(s);
 
+            System.out.println("" + comp);
+
             if (comp < 0) { // Song must come before, move the right pointer
                 r = m - 1;
             } else if (comp > 0) { // Song must come after, move the left pointer

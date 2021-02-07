@@ -17,6 +17,10 @@ import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
  * The UI Controller class for the application.
  */
 public class UI {
+    /**
+     * An {@link ObservableList} wrapper that allows the {@code Library} obect to be
+     * observed by the {@code ListView} and be subsequently updated when the list is modified.
+     */
     public class ObservableLibrary extends ModifiableObservableListBase<Song> {
         private final Library DELEGATE;
 
@@ -30,6 +34,18 @@ public class UI {
 
         public Song get(int index) { 
             return DELEGATE.get(index);
+        }
+
+        @Override
+        public boolean add(Song element) {
+            boolean ret = false;
+
+            beginChange();
+            ret = DELEGATE.add(element);
+            nextAdd(0, size() - 1);
+            endChange();
+
+            return ret;
         }
 
         public int size() {
@@ -64,7 +80,9 @@ public class UI {
         lblName,
         lblArtist,
         lblAlbum,
-        lblYear;
+        lblYear,
+        lblDebug,
+        lblFieldStatus;
 
     @FXML TextField 
         txtName,
@@ -136,17 +154,22 @@ public class UI {
         // Step 1: Validate input
         if (!name.isEmpty() && !artist.isEmpty()) {
             if (!album.isEmpty() || !year.isEmpty()){
-                s = new Song(name, artist, album, Integer.parseInt(year));
+                s = new Song(name, artist, album, year.isEmpty() ? 0 : Integer.parseInt(year));
             } else {
                 s = new Song(name, artist);
             }
 
             // Step 2: Attempt to add the song
-            if (!obsLib.add(s)) {
-                // TODO: Add a status label to display this
-                System.out.println("Sorry, repeat!");
-            }
+            if (!obsLib.add(s))
+                debug("Couldn't add \"%s\", duplicate exists!", s.toString());
+            else
+                debug("Successfully added \"%s\"", s.toString());
         }
+
+        txtName.setText("");
+        txtArtist.setText("");
+        txtAlbum.setText("");
+        txtYear.getEditor().setText("");
     }
     
     @FXML
@@ -164,7 +187,7 @@ public class UI {
             // Step 1: Validate input
             if (!name.isEmpty() && !artist.isEmpty()) {
                 if (!album.isEmpty() || !year.isEmpty()) {
-                    s = new Song(name, artist, album, Integer.parseInt(year));
+                    s = new Song(name, artist, album, year.isEmpty() ? 0 : Integer.parseInt(year));
                 } else {
                     s = new Song(name, artist);
                 }
@@ -174,15 +197,21 @@ public class UI {
 
                 if (!obsLib.add(s)) {
                     obsLib.add(temp);
-                }
+
+                    debug("Couldn't save \"%s\", duplicate exists!", s.toString());
+                } else
+                    debug("Saved \"%s\" as \"%s\"", temp.toString(), s.toString());
             } 
 
             txtName.setText("");
             txtArtist.setText("");
             txtAlbum.setText("");
-            txtName.setText("");
+            txtYear.getEditor().setText("");
         } else {
             s = obsLib.get(curSelected);
+
+            lblFieldStatus.setText("Editing " + s.toString());
+            debug("Editing \"%s\"", s.toString());
 
             txtName.setText(s.getName());
             txtArtist.setText(s.getArtist());
@@ -190,8 +219,22 @@ public class UI {
             txtYear.getEditor().setText("" + (s.getYear() > 0 ? s.getYear() : ""));
         }
 
+        // Regardless, let's toggle some buttons and things
         isEditing = !isEditing;
+
         lstSongs.setDisable(isEditing);
+        btnAdd.setDisable(isEditing);
+        btnDelete.setDisable(isEditing);
+    }
+
+    /**
+     * Sends a formatted debug message to the end user via the debug label.
+     * 
+     * @param format the message to set the debug label to.
+     */
+    private void debug(String format, Object... args) {
+        String message = String.format(format, args);
+        lblDebug.setText(message);
     }
 
     @FXML
