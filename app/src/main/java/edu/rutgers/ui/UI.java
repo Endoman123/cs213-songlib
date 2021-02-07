@@ -95,7 +95,8 @@ public class UI {
     @FXML
     public void initialize() {
         // Limit the txtYear box to only digits.
-        txtYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2021));
+        txtYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2021, 2021));
+        txtYear.getEditor().setText("");
         txtYear.getEditor().setTextFormatter(new TextFormatter<>(change -> {
             String t = change.getControlNewText();
 
