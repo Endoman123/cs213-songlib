@@ -16,9 +16,6 @@ import java.util.ArrayList;
  * @see ModifiableObservableList
  */
 public class Library extends ArrayList<Song> {
-    public Library() {
-    }
-
     /**
      * Finds a song by name and artist.
      * 
