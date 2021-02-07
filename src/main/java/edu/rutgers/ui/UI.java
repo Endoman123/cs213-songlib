@@ -1,17 +1,18 @@
 package edu.rutgers.ui;
 
-import edu.rutgers.library.*;
+import edu.rutgers.library.Library;
+import edu.rutgers.library.Song;
 
-import javafx.event.ActionEvent;
-import javafx.util.converter.IntegerStringConverter;
-
-import javafx.fxml.*;
-import javafx.application.Platform;
 import javafx.collections.ModifiableObservableListBase;
-import javafx.collections.FXCollections;
-
-import javafx.scene.control.*;
-import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 
 /**
  * The UI Controller class for the application.
@@ -73,7 +74,7 @@ public class UI {
 
     // Elements
     @FXML
-    private ListView 
+    private ListView<Song> 
         lstSongs;
 
     @FXML Label 
