@@ -8,11 +8,11 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id("java")
-    id("application")
-    id("eclipse")
-    id("idea")
-    id("org.openjfx.javafxplugin") version "0.0.9"
+    id "java"
+    id "application"
+    id "eclipse"
+    id "idea"
+    id "org.openjfx.javafxplugin" version "0.0.9"
 }
 
 repositories {
@@ -35,15 +35,15 @@ javafx {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
 tasks.compileJava {
-    options.release.set(11)
+    options.release = 11
 }
 
 application {
     // Define the main class for the application.
-    mainClass.set("edu.rutgers.main.SongLib")
+    mainClass = "edu.rutgers.main.SongLib"
 }
