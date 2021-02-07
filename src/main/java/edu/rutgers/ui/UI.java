@@ -120,6 +120,29 @@ public class UI {
      */
     @FXML
     public void initialize() {
+        // Limit the name, artist, and album to everything except "|"
+        TextFormatter<String> noPipeFormat = new TextFormatter<>(change -> {
+            String t = change.getControlNewText();
+
+            return t.contains("|") ? null : change;
+        });
+
+        txtName.setTextFormatter(new TextFormatter<>(change -> {
+            String t = change.getControlNewText();
+
+            return t.contains("|") ? null : change;
+        }));
+        txtArtist.setTextFormatter(new TextFormatter<>(change -> {
+            String t = change.getControlNewText();
+
+            return t.contains("|") ? null : change;
+        }));
+        txtAlbum.setTextFormatter(new TextFormatter<>(change -> {
+            String t = change.getControlNewText();
+
+            return t.contains("|") ? null : change;
+        }));
+
         // Limit the txtYear box to only digits.
         txtYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2021, 2021));
         txtYear.getEditor().setText("");
