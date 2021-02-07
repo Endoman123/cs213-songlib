@@ -24,6 +24,10 @@ public class UI {
             DELEGATE = l;
         }
         
+        public Song get(String name, String artist) {
+            return DELEGATE.get(name, artist);
+        }
+
         public Song get(int index) { 
             return DELEGATE.get(index);
         }
@@ -49,6 +53,7 @@ public class UI {
     private ObservableLibrary obsLib;
 
     private int curSelected;
+    private boolean isEditing = false;
 
     // Elements
     @FXML
@@ -110,7 +115,7 @@ public class UI {
             // We need this in other places, may as well track it globally.
             curSelected = new_val.intValue();
 
-            s = lib.get(curSelected);
+            s = obsLib.get(curSelected);
 
             lblName.setText(s.getName());
             lblArtist.setText(s.getArtist());
@@ -146,7 +151,47 @@ public class UI {
     
     @FXML
     public void editSong() {
-    	
+        Song s;
+
+        if (isEditing) {
+            Song temp;
+            String 
+                name = txtName.getText(),
+                artist = txtArtist.getText(),
+                album = txtAlbum.getText(),
+                year = txtYear.getEditor().getText();
+
+            // Step 1: Validate input
+            if (!name.isEmpty() && !artist.isEmpty()) {
+                if (!album.isEmpty() || !year.isEmpty()) {
+                    s = new Song(name, artist, album, Integer.parseInt(year));
+                } else {
+                    s = new Song(name, artist);
+                }
+                    
+                // Step 2: hack
+                temp = obsLib.remove(curSelected);
+
+                if (!obsLib.add(s)) {
+                    obsLib.add(temp);
+                }
+            } 
+
+            txtName.setText("");
+            txtArtist.setText("");
+            txtAlbum.setText("");
+            txtName.setText("");
+        } else {
+            s = obsLib.get(curSelected);
+
+            txtName.setText(s.getName());
+            txtArtist.setText(s.getArtist());
+            txtAlbum.setText(s.getAlbum());
+            txtYear.getEditor().setText("" + (s.getYear() > 0 ? s.getYear() : ""));
+        }
+
+        isEditing = !isEditing;
+        lstSongs.setDisable(isEditing);
     }
 
     @FXML
