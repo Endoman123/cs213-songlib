@@ -169,7 +169,7 @@ public class UI {
                     s = new Song(name, artist);
                 }
                     
-                // Step 2: hack
+                // Step 2: Remove the song to be edited and replace it
                 temp = obsLib.remove(curSelected);
 
                 if (!obsLib.add(s)) {
