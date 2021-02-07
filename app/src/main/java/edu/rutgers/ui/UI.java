@@ -3,143 +3,144 @@ package edu.rutgers.ui;
 import edu.rutgers.library.*;
 
 import javafx.event.ActionEvent;
+import javafx.util.converter.IntegerStringConverter;
 
 import javafx.fxml.*;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
+import javafx.collections.ModifiableObservableListBase;
 import javafx.collections.FXCollections;
 
 import javafx.scene.control.*;
+import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 
 /**
  * The UI Controller class for the application.
  */
 public class UI {
-    private enum State {
-        ADD,
-        VIEW,
-        EDIT
+    public class ObservableLibrary extends ModifiableObservableListBase<Song> {
+        private final Library DELEGATE;
+
+        protected ObservableLibrary(Library l) {
+            DELEGATE = l;
+        }
+        
+        public Song get(int index) { 
+            return DELEGATE.get(index);
+        }
+
+        public int size() {
+            return DELEGATE.size();
+        }
+
+        protected void doAdd(int index, Song element) {
+            DELEGATE.add(element);
+        }
+
+        protected Song doSet(int index, Song element) {
+            return DELEGATE.set(index, element);
+        }
+
+        protected Song doRemove(int index) {
+            return DELEGATE.remove(index);
+        }
     }
-    //@FXML ListView lstSongs;
 
     private Library lib;
-    private ObservableList<Song> olLibrary;
+    private ObservableLibrary obsLib;
 
-    private State curState;
+    private int curSelected;
 
     // Elements
     @FXML
-    private ListView lstSongs;
+    private ListView 
+        lstSongs;
 
-	@FXML TextField inputName;
-	@FXML TextField inputArtist;
-	@FXML TextField inputAlbum;
-	@FXML TextField inputYear;
+    @FXML Label 
+        lblName,
+        lblArtist,
+        lblAlbum,
+        lblYear;
+
+    @FXML TextField 
+        txtName,
+        txtArtist,
+        txtAlbum;
     
-    public void start() {
-    	lib = new Library();
-        olLibrary = FXCollections.observableList(lib);
+    @FXML Spinner<Integer>
+        txtYear;
 
-        lib.read("library.txt");
+    @FXML Button 
+        btnAdd,
+        btnEdit,
+        btnDelete;
 
-        System.out.println("Library app started");
-        
-        lstSongs.setItems(olLibrary);
+    /**
+     * Sets the library to use with the song list.
+     * 
+     * @param l the {@code Library} object to bind to the {@code ListView} items.
+     */
+    public void initLibrary(Library l) {
+        lib = l;
+        obsLib = new ObservableLibrary(lib);
 
+        lstSongs.setItems(obsLib);
         lstSongs.getSelectionModel().select(0);
-        lstSongs.getSelectionModel().selectedIndexProperty().addListener( (ov, old_val, new_val) -> {
-            if ((int)new_val == -1)
-                curState = State.ADD;
-            else
-                curState = State.VIEW;
-        });
     }
-    
-    /*
+
+    /**
+     * Initialization of the UI. Hooked into the event where the parent stage becomes visible.
+     * <p>
+     * Used to initialize our listeners, filters, etc. in here.
+     */
     @FXML
     public void initialize() {
-        lib = new Library();
-        olLibrary = FXCollections.observableList(lib);
+        // Limit the txtYear box to only digits.
+        txtYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 2021));
+        txtYear.getEditor().setTextFormatter(new TextFormatter<>(change -> {
+            String t = change.getControlNewText();
 
-        lib.read("library.txt");
+            return t.matches("([1-9][0-9]{0,3})?") ? change : null;
+        }));
 
-        System.out.println("Library app started");
-
-        lstSongs.setItems(olLibrary);
-
-        lstSongs.getSelectionModel().select(0);
+        // Update the info display for the music
         lstSongs.getSelectionModel().selectedIndexProperty().addListener( (ov, old_val, new_val) -> {
-            if ((int)new_val == -1)
-                curState = State.ADD;
-            else
-                curState = State.VIEW;
+            Song s;
+
+            // We need this in other places, may as well track it globally.
+            curSelected = new_val.intValue();
+
+            s = lib.get(curSelected);
+
+            lblName.setText(s.getName());
+            lblArtist.setText(s.getArtist());
+            lblAlbum.setText(s.getAlbum().isEmpty() ? "" : s.getAlbum());
+            lblYear.setText("" + (s.getYear() > 0 ? s.getYear() : ""));
         });
     }
-    */
 
     @FXML
     public void addSong() {
-    	String name = inputName.getText();
-		System.out.println("Name: " + name);
-		if (name.equals("")) {
-			System.out.println("No Name");
+        Song s;
+        String 
+            name = txtName.getText(),
+            artist = txtArtist.getText(),
+            album = txtAlbum.getText(),
+            year = txtYear.getEditor().getText();
 
-			inputName.setText("");
-			inputArtist.setText("");
-			inputAlbum.setText("");
-			inputYear.setText("");
-			System.out.println();
-			return;
-		}
-		
-		String artist = inputArtist.getText();
-		System.out.println("Artist: " + artist);
-		if (artist.equals("")) {
-			System.out.println("No Artist");
+        // Step 1: Validate input
+        if (!name.isEmpty() && !artist.isEmpty()) {
+            if (!album.isEmpty() || !year.isEmpty()){
+                s = new Song(name, artist, album, Integer.parseInt(year));
+            } else {
+                s = new Song(name, artist);
+            }
 
-			inputName.setText("");
-			inputArtist.setText("");
-			inputAlbum.setText("");
-			inputYear.setText("");
-			System.out.println();
-			return;
-		}
-		
-		String album = inputAlbum.getText();
-		System.out.println("Album: " + album);
-		
-		String year = inputYear.getText();
-		int numOfYear = 0;
-		try {
-			numOfYear = Integer.parseInt(year);
-			if (numOfYear < 0) {
-				// THROW ERROR AND DO NOT ADD SONG
-				System.out.println("Negative year");
-				
-				inputName.setText("");
-				inputArtist.setText("");
-				inputAlbum.setText("");
-				inputYear.setText("");
-				System.out.println();
-				return;
-			} else {
-				System.out.println("Year: " + numOfYear);
-			}
-		} catch (NumberFormatException nfe) {
-			//e1.printStackTrace();
-			
-		}
-		
-		Song temp = new Song(name, artist, album, numOfYear);
-		
-		olLibrary.add(temp);
-		FXCollections.sort(olLibrary);
-
-		inputName.setText("");
-		inputArtist.setText("");
-		inputAlbum.setText("");
-		inputYear.setText("");
-		
+            // Step 2: Attempt to add the song
+            if (!obsLib.add(s)) {
+                // TODO: Add a status label to display this
+                System.out.println("Sorry, repeat!");
+            }
+        }
     }
     
     @FXML
@@ -149,16 +150,6 @@ public class UI {
 
     @FXML
     public void deleteSong() {
-    	
-    }
-    
-    public void close() {
-        lib.write("library.txt");
-        System.out.println("Saved to library.txt");
-    }
-
-    @FXML
-    public void exitApplication(ActionEvent event) {
-        Platform.exit();
+        obsLib.remove(curSelected);       
     }
 }

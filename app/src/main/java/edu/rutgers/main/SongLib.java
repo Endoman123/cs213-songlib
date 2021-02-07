@@ -1,6 +1,7 @@
 package edu.rutgers.main;
 
 import edu.rutgers.ui.UI;
+import edu.rutgers.library.Library;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,21 +13,27 @@ import javafx.stage.Stage;
  * Main runner class
  */
 public class SongLib extends Application {
+    private final String LIBRARY_PATH = "./library.txt";
+
     public static void main(String[] args) {
         launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+        Library lib;
+        UI ui;
+        Pane root;
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/songLib.fxml"));
-        Pane root = (Pane)loader.load();
 
-        //loader.setLocation(getClass().getResource("/main.fxml"));
-        
-        UI ui = loader.getController();
-        ui.start();
+        loader.setLocation(getClass().getResource("/songLib.fxml"));
+
+        root = loader.load();
+        ui = loader.getController();
+        lib = new Library();
+
+        lib.read(LIBRARY_PATH);
+        ui.initLibrary(lib);
 
         root.autosize();
 
@@ -34,7 +41,7 @@ public class SongLib extends Application {
         primaryStage.sizeToScene();
         primaryStage.setTitle("SongLib");
 
-        primaryStage.setOnHidden(e -> ui.close());
+        primaryStage.setOnHidden(e -> lib.write(LIBRARY_PATH));
         primaryStage.setResizable(true);
         primaryStage.show();
     }

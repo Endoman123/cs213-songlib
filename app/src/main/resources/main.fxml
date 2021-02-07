@@ -27,25 +27,25 @@
                   <Group>
                      <children>
                         <Label fx:id="lblName" layoutX="14.0" layoutY="5.0" text="Name:" />
-                        <TextField fx:id="txtName" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
+                        <TextField fx:id="txtName" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblArtist" layoutX="14.0" layoutY="5.0" text="Artist:" />
-                        <TextField fx:id="txtArtist" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
+                        <TextField fx:id="txtArtist" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblAlbum" layoutX="14.0" layoutY="5.0" text="Album:" />
-                        <TextField fx:id="txtAlbum" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
+                        <TextField fx:id="txtAlbum" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                   <Group>
                      <children>
                         <Label fx:id="lblYear" layoutX="14.0" layoutY="5.0" text="Year:" />
-                        <TextField fx:id="txtYear" alignment="CENTER" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
+                        <TextField fx:id="txtYear" layoutX="67.0" maxHeight="30.0" maxWidth="160.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="160.0" />
                      </children>
                   </Group>
                </children>
