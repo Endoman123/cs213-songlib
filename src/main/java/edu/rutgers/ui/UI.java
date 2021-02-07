@@ -19,8 +19,10 @@ import javafx.scene.control.TextFormatter;
  */
 public class UI {
     /**
-     * An {@link ObservableList} wrapper that allows the {@code Library} obect to be
+     * An {@code ObservableList} wrapper that allows the {@code Library} obect to be
      * observed by the {@code ListView} and be subsequently updated when the list is modified.
+     * 
+     * @see ObservableList
      */
     public class ObservableLibrary extends ModifiableObservableListBase<Song> {
         private final Library DELEGATE;
@@ -230,18 +232,19 @@ public class UI {
         btnDelete.setDisable(isEditing);
     }
 
+    @FXML
+    public void deleteSong() {
+        obsLib.remove(curSelected);       
+    }
+
     /**
      * Sends a formatted debug message to the end user via the debug label.
      * 
-     * @param format the message to set the debug label to.
+     * @param format the format of the debug message
+     * @param args   the arguments to pass to the format
      */
     private void debug(String format, Object... args) {
         String message = String.format(format, args);
         lblDebug.setText(message);
-    }
-
-    @FXML
-    public void deleteSong() {
-        obsLib.remove(curSelected);       
     }
 }
