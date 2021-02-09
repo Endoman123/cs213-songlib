@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.ui;
 
 import edu.rutgers.library.Library;
@@ -18,6 +16,9 @@ import javafx.scene.control.TextFormatter;
 
 /**
  * The UI Controller class for the application.
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  */
 public class UI {
     /**

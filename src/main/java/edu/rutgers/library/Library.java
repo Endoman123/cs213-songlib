@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.library;
 
 import java.io.*;
@@ -13,6 +11,9 @@ import java.util.ArrayList;
  * <p>
  * This is an extension of an {@code ModifiableObservableList}, so all those functions apply,
  * as well as some niceties.
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  * 
  * @see Song
  * @see ModifiableObservableList

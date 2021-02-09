@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.library;
 
 /**
@@ -7,6 +5,9 @@ package edu.rutgers.library;
  * <p> 
  * This will maintain a way of storing a song's fields,
  * as well as provide a standard of writing out a song's info. 
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  * 
  * @see Library
  */
