@@ -1,3 +1,5 @@
+//Oscar Bartolo
+//Jared Tulayan
 package edu.rutgers.main;
 
 import edu.rutgers.ui.UI;

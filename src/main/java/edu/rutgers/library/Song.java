@@ -1,3 +1,5 @@
+//Oscar Bartolo
+//Jared Tulayan
 package edu.rutgers.library;
 
 /**
@@ -147,9 +149,9 @@ public class Song implements Comparable<Song> {
         return String.format(
             "%s - %s [%s, %s]", 
             name,
-            artist,
-            year == 0 ? "????" : "" + year,
-            album.isEmpty() ? "????" : album
+            artist,            
+            album.isEmpty() ? "????" : album,
+            year == 0 ? "????" : "" + year
         );
     }
 }
