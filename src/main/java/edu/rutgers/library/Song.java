@@ -138,11 +138,11 @@ public class Song implements Comparable<Song> {
      * 
      * The format is as follows:
      * <pre>
-     * "ARTIST - NAME [ALBUM, YEAR]"
+     * "NAME - ARTIST [ALBUM, YEAR]"
      * </pre>
      * For instance, Hippo Campus' "Way it Goes" would display as
      * <pre>
-     * "Hippo Campus - Way it Goes [Landmark, 2017]"
+     * "Way it Goes - Hippo Campus [Landmark, 2017]"
      * </pre>
      */
     public String toString() {
