@@ -44,9 +44,14 @@
                      </children>
                   </AnchorPane>
                		
-                                       	<Button fx:id="btnEdit" onAction="#editSong" prefWidth="150" text="Edit Song" />
+                                        
                		
                                        	<Button fx:id="btnDelete" onAction="#deleteSong" prefWidth="150" text="Delete Song" />
+                                       	
+                                       	<Button fx:id="btnCancelDelete" onAction="#cancelDelete" prefWidth="150" text="Cancel" Visible="false" />
+                                       	
+                                       	<Button fx:id="btnConfirmDelete" onAction="#confirmDelete" prefWidth="150" text="Confirm" Visible="false" />                                       	
+                                       	                                       	
                </children>
             </VBox>
             
@@ -63,29 +68,32 @@
                      	
                                                 	<TextField fx:id="txtName" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      	
-                                                	<Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Name:" AnchorPane.leftAnchor="0.0" />
+                                                	<Label fx:id="nameText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Name:" AnchorPane.leftAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="194.0" prefHeight="0.0" prefWidth="213.0">
                      <children>
                         <TextField fx:id="txtArtist" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Artist" AnchorPane.leftAnchor="0.0" />
+                        <Label fx:id="artistText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Artist" AnchorPane.leftAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="222.0" prefHeight="0.0" prefWidth="213.0">
                      <children>
                         <TextField fx:id="txtAlbum" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Album" AnchorPane.leftAnchor="0.0" />
+                        <Label fx:id="albumText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Album" AnchorPane.leftAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="10.0" layoutY="250.0" prefHeight="0.0" prefWidth="213.0">
                      <children>
                         <Spinner fx:id="txtYear" editable="true" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Label layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Year" AnchorPane.leftAnchor="0.0" />
+                        <Label fx:id="yearText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Year" AnchorPane.leftAnchor="0.0" />
                      </children>
                   </AnchorPane>
                	
                                                 	<Button fx:id="btnAdd" onAction="#addSong" prefWidth="150" text="Add Song" />
+                                                	
+                                                	<Button fx:id="btnEdit" onAction="#editSong" prefWidth="150" text="Edit Song" />
+                                                	
                </children>
             </VBox>
          </children>

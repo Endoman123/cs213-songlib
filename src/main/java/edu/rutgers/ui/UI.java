@@ -73,6 +73,7 @@ public class UI {
 
     private int curSelected;
     private boolean isEditing = false;
+    private boolean isDeleting = false;
 
     // Elements
     @FXML
@@ -85,7 +86,12 @@ public class UI {
         lblAlbum,
         lblYear,
         lblDebug,
-        lblFieldStatus;
+        lblFieldStatus,
+        nameText,
+        artistText,
+        albumText,
+        yearText;
+    
 
     @FXML TextField 
         txtName,
@@ -98,7 +104,9 @@ public class UI {
     @FXML Button 
         btnAdd,
         btnEdit,
-        btnDelete;
+        btnDelete,
+        btnConfirmDelete,
+        btnCancelDelete;
 
     /**
      * Sets the library to use with the song list.
@@ -186,11 +194,15 @@ public class UI {
             }
 
             // Step 2: Attempt to add the song
-            if (!obsLib.add(s))
+            if (!obsLib.add(s)) {
                 debug("Couldn't add \"%s\", duplicate exists!", s.toString());
-            else
+            } else {
                 debug("Successfully added \"%s\"", s.toString());
+                lstSongs.getSelectionModel().clearAndSelect(obsLib.indexOf(s));
+            }
         }
+        
+        
 
         txtName.setText("");
         txtArtist.setText("");
@@ -223,10 +235,15 @@ public class UI {
 
                 if (!obsLib.add(s)) {
                     obsLib.add(temp);
-
+                    
+                    lstSongs.getSelectionModel().select(temp);;
+                    
                     debug("Couldn't save \"%s\", duplicate exists!", s.toString());
-                } else
+                } else {
                     debug("Saved \"%s\" as \"%s\"", temp.toString(), s.toString());
+                    
+                    lstSongs.getSelectionModel().select(s);;
+                }
             } 
 
             txtName.setText("");
@@ -257,9 +274,61 @@ public class UI {
 
     @FXML
     public void deleteSong() {
-        obsLib.remove(curSelected);       
+    	if (!isDeleting) {
+    		Song s = obsLib.get(curSelected);
+    		debug("Delete \"%s\"?", s.toString());
+    	}
+    	
+    	isDeleting = !isDeleting;
+    	
+    	lstSongs.setDisable(isDeleting);
+    	btnEdit.setDisable(isDeleting);
+    	btnAdd.setDisable(isDeleting);
+    	btnDelete.setDisable(isDeleting);
+    	btnConfirmDelete.setVisible(isDeleting);
+    	btnCancelDelete.setVisible(isDeleting);
+    	
+
+    	txtName.setDisable(isDeleting);
+    	txtArtist.setDisable(isDeleting);
+    	txtAlbum.setDisable(isDeleting);
+    	txtYear.setDisable(isDeleting);
+    	
+    	lblFieldStatus.setDisable(isDeleting);
+    	nameText.setDisable(isDeleting);
+    	artistText.setDisable(isDeleting);
+    	albumText.setDisable(isDeleting);
+    	yearText.setDisable(isDeleting);
     }
 
+    @FXML
+    public void confirmDelete() {
+        // If deleting the last song, select new last song
+    	// Otherwise, select the next song in the last
+        int index = (lstSongs.getSelectionModel().getSelectedIndex() == obsLib.size()-1) 
+        		? lstSongs.getSelectionModel().getSelectedIndex()-1
+        		: lstSongs.getSelectionModel().getSelectedIndex();
+        		
+        // Delete song
+        Song s = obsLib.get(curSelected);
+        debug("Deleted \"%s\"", s.toString());
+        obsLib.remove(curSelected);
+        
+    	
+    	
+    	// Select new index
+    	lstSongs.getSelectionModel().select(index);;
+    	
+    	deleteSong();
+    }
+    
+    @FXML
+    public void cancelDelete() {
+    	Song s = obsLib.get(curSelected);
+    	debug("Canceled Deleting \"%s\"", s.toString());
+    	deleteSong();
+    }
+    
     /**
      * Sends a formatted debug message to the end user via the debug label.
      * 

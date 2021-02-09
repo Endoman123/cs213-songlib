@@ -42,7 +42,7 @@ public class SongLib extends Application {
         primaryStage.setTitle("SongLib");
 
         primaryStage.setOnHidden(e -> lib.write(LIBRARY_PATH));
-        primaryStage.setResizable(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

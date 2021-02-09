@@ -146,8 +146,8 @@ public class Song implements Comparable<Song> {
     public String toString() {
         return String.format(
             "%s - %s [%s, %s]", 
-            artist,
             name,
+            artist,
             year == 0 ? "????" : "" + year,
             album.isEmpty() ? "????" : album
         );
