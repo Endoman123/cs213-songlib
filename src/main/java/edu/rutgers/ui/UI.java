@@ -131,12 +131,6 @@ public class UI {
     @FXML
     public void initialize() {
         // Limit the name, artist, and album to everything except "|"
-        TextFormatter<String> noPipeFormat = new TextFormatter<>(change -> {
-            String t = change.getControlNewText();
-
-            return t.contains("|") ? null : change;
-        });
-
         txtName.setTextFormatter(new TextFormatter<>(change -> {
             String t = change.getControlNewText();
 
