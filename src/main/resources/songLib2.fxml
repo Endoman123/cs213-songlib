@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.rutgers.ui.UI">
+   <children>
+      <HBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+               	
+                                       	<Label alignment="CENTER" text="Song Details" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+                  <AnchorPane prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <Label layoutY="3.0" prefHeight="18.0" prefWidth="54.0" text="Name:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="lblName" alignment="CENTER_RIGHT" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="117.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <Label layoutY="3.0" prefHeight="18.0" prefWidth="54.0" text="Artist:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="lblArtist" alignment="CENTER_RIGHT" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="207.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <Label layoutY="3.0" prefHeight="18.0" prefWidth="54.0" text="Album:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="lblAlbum" alignment="CENTER_RIGHT" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="221.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <Label layoutY="3.0" prefHeight="18.0" prefWidth="54.0" text="Year:" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="lblYear" alignment="CENTER_RIGHT" layoutX="63.0" layoutY="4.0" prefHeight="18.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>             
+               		
+                         <Button fx:id="btnDelete" onAction="#deleteSong" prefWidth="150" text="Delete Song" />
+                                       	
+                         <Button fx:id="btnCancelDelete" Visible="false" onAction="#cancelDelete" prefWidth="150" text="Cancel" />
+                                       	
+                         <Button fx:id="btnConfirmDelete" Visible="false" onAction="#confirmDelete" prefWidth="150" text="Confirm" />                                       	
+                                       	                                       	
+               </children>
+            </VBox>
+            
+                              <VBox>
+            		<ListView fx:id="lstSongs" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="280" prefWidth="300.0" VBox.vgrow="ALWAYS" />
+            </VBox>      
+                      
+            <VBox alignment="CENTER" prefWidth="213.0" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+               	
+                                          	<Label fx:id="lblFieldStatus" prefHeight="20.0" text="Add a song below:" underline="true" />
+                  <AnchorPane prefHeight="0.0" prefWidth="213.0" VBox.vgrow="NEVER">
+                     <children>
+                     	
+                            <TextField fx:id="txtName" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     	
+                            <Label fx:id="nameText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Name:" AnchorPane.leftAnchor="0.0" />
+                            
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="194.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <TextField fx:id="txtArtist" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="artistText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Artist" AnchorPane.leftAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="222.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <TextField fx:id="txtAlbum" layoutX="107.0" layoutY="4.0" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="albumText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Album" AnchorPane.leftAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="250.0" prefHeight="0.0" prefWidth="213.0">
+                     <children>
+                        <Spinner fx:id="txtYear" editable="true" prefHeight="28.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="yearText" layoutY="5.0" prefHeight="18.0" prefWidth="77.0" text="Year" AnchorPane.leftAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <Pane prefHeight="141.0" prefWidth="220.0">
+                     <children>
+                     	
+                        <Button fx:id="btnAdd" layoutX="10.0" layoutY="5.0" onAction="#addSong" prefHeight="30.0" prefWidth="200.0" text="Add Song" />
+                                                      	
+                        <Button fx:id="btnConfirmAdd" Visible="false" onAction="#confirmAdd" layoutX="112.5" layoutY="40.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.5" text="Confirm" />
+                        
+                        <Button fx:id="btnCancelAdd" Visible="false" onAction="#cancelAdd" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.5" text="Cancel" />
+                        
+                        <Button fx:id="btnEdit" layoutX="10.0" layoutY="75.0" onAction="#editSong" prefHeight="30.0" prefWidth="200.0" text="Edit Song" />
+                        
+                        <Button fx:id="btnCancelEdit" Visible="false" onAction="#cancelEdit" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.5" text="Cancel" />
+                        
+                        <Button fx:id="btnConfirmEdit" Visible="false" onAction="#confirmEdit" layoutX="112.5" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.5" text="Confirm" />
+                     
+                     </children>
+                  </Pane>
+                                                	
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <Separator prefWidth="200.0" VBox.vgrow="NEVER" />
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
+         <children>
+            <Label fx:id="lblDebug" alignment="CENTER_RIGHT" text="Welcome to the Song Library!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
+      </AnchorPane>
+   </children>
+</VBox>
