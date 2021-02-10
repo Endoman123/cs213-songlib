@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.library;
 
 /**
@@ -7,6 +5,9 @@ package edu.rutgers.library;
  * <p> 
  * This will maintain a way of storing a song's fields,
  * as well as provide a standard of writing out a song's info. 
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  * 
  * @see Library
  */
@@ -138,11 +139,11 @@ public class Song implements Comparable<Song> {
      * 
      * The format is as follows:
      * <pre>
-     * "ARTIST - NAME [ALBUM, YEAR]"
+     * "NAME - ARTIST [ALBUM, YEAR]"
      * </pre>
      * For instance, Hippo Campus' "Way it Goes" would display as
      * <pre>
-     * "Hippo Campus - Way it Goes [Landmark, 2017]"
+     * "Way it Goes - Hippo Campus [Landmark, 2017]"
      * </pre>
      */
     public String toString() {

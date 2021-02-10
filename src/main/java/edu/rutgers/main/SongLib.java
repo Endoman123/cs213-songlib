@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.main;
 
 import edu.rutgers.ui.UI;
@@ -13,6 +11,9 @@ import javafx.stage.Stage;
 
 /**
  * Main runner class
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  */
 public class SongLib extends Application {
     private final String LIBRARY_PATH = "./library.txt";

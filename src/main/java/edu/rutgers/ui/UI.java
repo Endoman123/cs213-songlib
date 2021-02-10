@@ -1,5 +1,3 @@
-//Oscar Bartolo
-//Jared Tulayan
 package edu.rutgers.ui;
 
 import edu.rutgers.library.Library;
@@ -18,6 +16,9 @@ import javafx.scene.control.TextFormatter;
 
 /**
  * The UI Controller class for the application.
+ * 
+ * @author Oscar Bartolo
+ * @author Jared Tulayan
  */
 public class UI {
     /**
@@ -137,12 +138,6 @@ public class UI {
     @FXML
     public void initialize() {
         // Limit the name, artist, and album to everything except "|"
-        TextFormatter<String> noPipeFormat = new TextFormatter<>(change -> {
-            String t = change.getControlNewText();
-
-            return t.contains("|") ? null : change;
-        });
-
         txtName.setTextFormatter(new TextFormatter<>(change -> {
             String t = change.getControlNewText();
 
