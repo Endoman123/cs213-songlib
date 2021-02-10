@@ -28,7 +28,8 @@ public class SongLib extends Application {
         Pane root;
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(getClass().getResource("/songLib.fxml"));
+        //loader.setLocation(getClass().getResource("/songLib.fxml"));
+        loader.setLocation(getClass().getResource("/songLib2.fxml"));
 
         root = loader.load();
         ui = loader.getController();

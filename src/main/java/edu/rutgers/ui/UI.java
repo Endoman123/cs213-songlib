@@ -76,6 +76,7 @@ public class UI {
     private int curSelected;
     private boolean isEditing = false;
     private boolean isDeleting = false;
+    private boolean isAdding = false;
 
     // Elements
     @FXML
@@ -89,6 +90,7 @@ public class UI {
         lblYear,
         lblDebug,
         lblFieldStatus,
+        lblSongDetails,
         nameText,
         artistText,
         albumText,
@@ -108,7 +110,11 @@ public class UI {
         btnEdit,
         btnDelete,
         btnConfirmDelete,
-        btnCancelDelete;
+        btnCancelDelete,
+        btnConfirmAdd,
+        btnCancelAdd,
+        btnConfirmEdit,
+        btnCancelEdit;
 
     /**
      * Sets the library to use with the song list.
@@ -180,12 +186,63 @@ public class UI {
 
     @FXML
     public void addSong() {
-        Song s;
+    	if (!isAdding) {
+    		
+    		
+        	String 
+            name = txtName.getText(),
+            artist = txtArtist.getText(),
+            album = txtAlbum.getText(),
+            year = txtYear.getEditor().getText();
+        	
+        	if (name.equals("") || artist.equals("")) {
+        		if (name.equals("") && artist.equals("")) {
+        			debug("Must include song name and artist");
+        		} else if (name.equals("")) {
+        			debug("Must include song name");
+        		} else {
+        			debug("Must include artist");
+        		}
+        		return;
+        	}
+        	
+        	Song temp = new Song(name, artist, album, year.isEmpty() ? 0 : Integer.parseInt(year));
+        	debug("Add \"%s\"?", temp.toString());
+    	}
+    	
+    	isAdding = !isAdding;
+    	
+    	lstSongs.setDisable(isAdding);
+    	btnEdit.setDisable(isAdding);
+    	btnAdd.setDisable(isAdding);
+    	btnDelete.setDisable(isAdding);
+    	btnConfirmAdd.setVisible(isAdding);
+    	btnCancelAdd.setVisible(isAdding);
+    	
+
+    	txtName.setDisable(isAdding);
+    	txtArtist.setDisable(isAdding);
+    	txtAlbum.setDisable(isAdding);
+    	txtYear.setDisable(isAdding);
+    	
+    	lblFieldStatus.setDisable(isAdding);
+    	nameText.setDisable(isAdding);
+    	artistText.setDisable(isAdding);
+    	albumText.setDisable(isAdding);
+    	yearText.setDisable(isAdding);
+    	
+    	
+    }
+    
+    @FXML
+    public void confirmAdd() {
+    	Song s;
         String 
             name = txtName.getText(),
             artist = txtArtist.getText(),
             album = txtAlbum.getText(),
             year = txtYear.getEditor().getText();
+        
 
         // Step 1: Validate input
         if (!name.isEmpty() && !artist.isEmpty()) {
@@ -204,17 +261,69 @@ public class UI {
             }
         }
         
-        
-
         txtName.setText("");
         txtArtist.setText("");
         txtAlbum.setText("");
         txtYear.getEditor().setText("");
+        
+        addSong();
+    }
+    
+    @FXML
+    public void cancelAdd() {
+    	
+    	String 
+        name = txtName.getText(),
+        artist = txtArtist.getText(),
+        album = txtAlbum.getText(),
+        year = txtYear.getEditor().getText();
+    	
+    	Song temp = new Song(name, artist, album, year.isEmpty() ? 0 : Integer.parseInt(year));
+    	debug("Cancelled Adding \"%s\"?", temp.toString());
+    	
+    	
+    	txtName.setText("");
+        txtArtist.setText("");
+        txtAlbum.setText("");
+        txtYear.getEditor().setText("");
+        
+        addSong();
+    	
     }
     
     @FXML
     public void editSong() {
-        Song s;
+        
+
+        // Regardless, let's toggle some buttons and things
+        isEditing = !isEditing;
+        
+        if (isEditing) {
+        	Song s;
+            s = obsLib.get(curSelected);
+
+            lblFieldStatus.setText("Editing " + s.toString());
+            debug("Editing \"%s\"...", s.toString());
+
+            txtName.setText(s.getName());
+            txtArtist.setText(s.getArtist());
+            txtAlbum.setText(s.getAlbum());
+            txtYear.getEditor().setText("" + (s.getYear() > 0 ? s.getYear() : ""));
+        }
+        
+        lstSongs.setDisable(isEditing);
+    	btnEdit.setDisable(isEditing);
+    	btnAdd.setDisable(isEditing);
+    	btnDelete.setDisable(isEditing);
+    	btnConfirmEdit.setVisible(isEditing);
+    	btnCancelEdit.setVisible(isEditing);
+        
+    	
+    }
+    
+    @FXML
+    public void confirmEdit() {
+    	Song s;
 
         if (isEditing) {
             Song temp;
@@ -254,25 +363,23 @@ public class UI {
             txtYear.getEditor().setText("");
 
             lblFieldStatus.setText("Add a song below:");
-        } else {
-            s = obsLib.get(curSelected);
-
-            lblFieldStatus.setText("Editing " + s.toString());
-            debug("Editing \"%s\"...", s.toString());
-
-            txtName.setText(s.getName());
-            txtArtist.setText(s.getArtist());
-            txtAlbum.setText(s.getAlbum());
-            txtYear.getEditor().setText("" + (s.getYear() > 0 ? s.getYear() : ""));
         }
-
-        // Regardless, let's toggle some buttons and things
-        isEditing = !isEditing;
-
-        lstSongs.setDisable(isEditing);
-        btnAdd.setDisable(isEditing);
-        btnDelete.setDisable(isEditing);
+        editSong();
     }
+    
+    @FXML
+    public void cancelEdit() {
+    	Song s = obsLib.get(curSelected);
+    	debug("Canceled Editing \"%s\"", s.toString());
+    	
+    	txtName.setText("");
+        txtArtist.setText("");
+        txtAlbum.setText("");
+        txtYear.getEditor().setText("");
+    	
+    	editSong();
+    }
+    
 
     @FXML
     public void deleteSong() {
